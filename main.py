@@ -1,16 +1,15 @@
-from PyQt5 import uic
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from PyQt5.QtGui import QPainter, QColor
 import sys
 import random
-
+from UI import Ui_MainWindow
 SCREEN_SIZE = [500, 500]
 
 
-class Example(QMainWindow):
+class Example(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
-        uic.loadUi('UI.ui', self)
+        self.setupUi(self)
         self.flag = False
         self.setWindowTitle('Git и желтые окружности')
         self.pushButton.clicked.connect(self.draw)
@@ -19,7 +18,10 @@ class Example(QMainWindow):
     def draw(self):
         self.figure = 'circle'
         self.size = random.randint(10, 100)
-        self.color = (255, 255, 0)
+        r = random.randint(0, 255)
+        g = random.randint(0, 255)
+        b = random.randint(0, 255)
+        self.color = [r, g, b]
         self.flag = True
         self.update()
 
